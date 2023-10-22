@@ -1,0 +1,31 @@
+info:
+  app:
+    name: uh2c-config-server-service service application
+    description: Microservice config-server UH2C
+    version: G2R3C1
+
+ # Application name config-server
+spring:
+  application:
+    name: uh2c-config-server-service
+    
+# Spring Boot Actuator
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /actuator
+      exposure:
+        include: "health,info,prometheus"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+      cache:
+        time-to-live: 300s
+    prometheus:
+      enabled: true
+      cache:
+        time-to-live: 30s

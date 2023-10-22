@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-5p %d{HH:mm:ss} [%t][%C{1}] [%X{demande}] %m%n</pattern>
+		</encoder>
+	</appender>
+		
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <File>uh2c-config-server.log</File>
+	    <Append>false</Append>
+	    
+	    <encoder>
+	      <pattern>%d{dd/MM/YY HH:mm:ss} %-5p [%t][%C{1}] [%X{demande}] %m%n</pattern>
+	    </encoder>
+	    
+	    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+	      <maxIndex>10</maxIndex>
+	      <FileNamePattern>uh2c-config-server.log.%i</FileNamePattern>
+	    </rollingPolicy>
+	    
+	    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+	      <MaxFileSize>20000KB</MaxFileSize>
+	    </triggeringPolicy>
+  	</appender>
+	
+	<!-- ################################################################### -->
+	<!-- ##################### Logger ###################################### -->
+	<!-- ################################################################### -->
+	<logger name="org.springframework" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="org.hibernate" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="org.apache.cxf" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="org.apache.cxf.interceptor" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+	
+	<!-- ################################################################### -->
+	<!-- ##################### Profil Spring################################ -->
+	<!-- ################################################################### -->
+	<springProfile name="dev">
+		<root level="DEBUG">
+			<appender-ref ref="FILE" />
+			<appender-ref ref="STDOUT" />
+		</root>
+	</springProfile>
+
+	<springProfile name="example">
+		<root level="INFO">
+			<appender-ref ref="STDOUT" />
+		</root>
+	</springProfile>
+</configuration>

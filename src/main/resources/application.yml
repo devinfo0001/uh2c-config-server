@@ -1,0 +1,17 @@
+# profil DEV  
+---
+spring:
+  profiles: dev
+  
+  cloud:
+    config:
+      server:
+        git:
+          # configuration local
+          
+          #uri: "D:\UH2C\documentsuh2c\Archive\test\test"
+          uri: "file://D:/UH2C/documentsuh2c/Archive/test/test/uh2c-configuration"
+
+#server port    
+server:  
+  port: 8888
